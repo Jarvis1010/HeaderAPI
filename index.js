@@ -1,6 +1,12 @@
 var express=require('express');
 var app=express();
 
+var port = process.env.PORT||8080;
+
+app.get('/', function(req,res){
+    res.send("To use this API, put in '/api/whoami/' on the end of URL above to get JSON of your header info.");
+});
+
 app.get('/api/whoami/', function(req,res){
     var headers = {"ipaddress":"","language":"","software":""};
     headers['ipaddress'] = req.headers['x-forwarded-for']
@@ -10,6 +16,6 @@ app.get('/api/whoami/', function(req,res){
     res.send(headers);
 });
 
-app.listen(8080,function(){
+app.listen(port,function(){
     console.log("Listening on port 8080");
 });
